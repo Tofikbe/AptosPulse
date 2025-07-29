@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import Image from 'next/image';
 
 export default function Home() {
   return (
@@ -7,5 +7,5 @@ export default function Home() {
       <p>The Aptos community vibes here 🔥</p>
       <Image src="/aptos-logo.png" alt="Aptos Logo" width={150} height={150} />
     </div>
-  )
+  );
 }
