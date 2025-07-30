@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <div
       style={{
-        backgroundImage: `url('/login-bg.jpg')`,
+        backgroundImage: `url('https://protoinfrastack.ivondy.com/media/AuyKf8Mzq2Fi5XHVQOLBuijX8fXufqFhYPAh')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         minHeight: '100vh',
@@ -16,14 +16,14 @@ export default function Home() {
       <div
         style={{
           backdropFilter: 'blur(12px)',
-          background: 'rgba(255, 255, 255, 0.1)',
+          background: 'rgba(255, 255, 255, 0.08)',
           border: '1px solid rgba(255, 255, 255, 0.2)',
           padding: '2rem',
           borderRadius: '20px',
           width: '90%',
           maxWidth: '400px',
           color: '#fff',
-          boxShadow: '0 4px 30px rgba(0, 0, 0, 0.5)',
+          boxShadow: '0 4px 30px rgba(0, 0, 0, 0.6)',
         }}
       >
         <h2 style={{ fontSize: '1.8rem', marginBottom: '1rem', textAlign: 'center' }}>
