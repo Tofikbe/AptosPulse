@@ -1,81 +1,46 @@
-import React from 'react'
+import { getProviders, signIn } from "next-auth/react"
 
-export default function Login() {
-  return (
-    <div style={styles.container}>
-      <div style={styles.loginBox}>
-        <h2 style={styles.heading}>Welcome Back!</h2>
-        <p style={styles.subheading}>Fill your login details</p>
-
-        <input style={styles.input} type="text" placeholder="Email Address" />
-        <input style={styles.input} type="password" placeholder="Password" />
-
-        <button style={styles.button}>Login</button>
-
-        <p style={styles.registerText}>
-          No account? <a href="#" style={styles.link}>Register here</a>
-        </p>
-      </div>
-    </div>
-  )
+export async function getServerSideProps() {
+  const providers = await getProviders()
+  return {
+    props: { providers },
+  }
 }
 
-const styles = {
-  container: {
-    minHeight: '100vh',
-    background: 'linear-gradient(to bottom right, rgba(0,255,0,0.1), rgba(0,0,0,0.9))',
-    backdropFilter: 'blur(8px)',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20
-  },
-  loginBox: {
-    background: 'rgba(0, 0, 0, 0.6)',
-    padding: 30,
-    borderRadius: 12,
-    width: '100%',
-    maxWidth: 360,
-    boxShadow: '0 0 20px rgba(0,255,0,0.2)',
-    color: '#fff',
-    textAlign: 'center'
-  },
-  heading: {
-    fontSize: 24,
-    marginBottom: 10
-  },
-  subheading: {
-    fontSize: 14,
-    marginBottom: 20,
-    color: '#ccc'
-  },
-  input: {
-    width: '100%',
-    padding: 12,
-    marginBottom: 15,
-    borderRadius: 6,
-    border: 'none',
-    outline: 'none',
-    background: '#111',
-    color: '#0f0'
-  },
-  button: {
-    width: '100%',
-    padding: 12,
-    background: '#0f0',
-    border: 'none',
-    borderRadius: 6,
-    fontWeight: 'bold',
-    color: '#000',
-    cursor: 'pointer'
-  },
-  registerText: {
-    marginTop: 15,
-    fontSize: 13,
-    color: '#aaa'
-  },
-  link: {
-    color: '#0f0',
-    textDecoration: 'underline'
-  }
+export default function LoginPage({ providers }) {
+  return (
+    <div style={{
+      height: "100vh",
+      backgroundImage: "url('https://protoinfrastack.ivondy.com/media/AuyKf8Mzq2Fi5XHVQOLBuijX8fXufqFhYPAh')",
+      backgroundSize: "cover",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      flexDirection: "column",
+      backdropFilter: "blur(5px)",
+    }}>
+      <h1 style={{ fontSize: "30px", color: "#fff", marginBottom: "20px" }}>Welcome Back Yappers</h1>
+
+      {Object.values(providers).map((provider) => (
+        <div key={provider.name}>
+          <button
+            onClick={() => signIn(provider.id)}
+            style={{
+              backgroundColor: "rgba(0,0,0,0.6)",
+              color: "white",
+              padding: "10px 20px",
+              borderRadius: "8px",
+              border: "none",
+              marginBottom: "10px",
+              cursor: "pointer",
+              fontSize: "16px",
+              width: "220px"
+            }}
+          >
+            Sign in with {provider.name}
+          </button>
+        </div>
+      ))}
+    </div>
+  )
 }
