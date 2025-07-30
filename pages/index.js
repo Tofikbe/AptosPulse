@@ -1,92 +1,76 @@
-import { useState } from 'react'
-import axios from 'axios'
-import { useRouter } from 'next/router'
+import React from 'react'
 
-export default function LoginPage() {
-  const [email, setEmail] = useState('')
-  const [loading, setLoading] = useState(false)
-  const router = useRouter()
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    setLoading(true)
-    try {
-      await axios.post('/api/send-otp', { email })
-      router.push(`/verify?email=${email}`)
-    } catch (err) {
-      alert('Error sending OTP')
-    }
-    setLoading(false)
-  }
-
+export default function Home() {
   return (
     <div
       style={{
-        backgroundImage: "url('https://images.unsplash.com/photo-1604537529428-15bcbeecfe4d')",
+        backgroundImage: `url('/login-bg.jpg')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        height: '100vh',
+        minHeight: '100vh',
         display: 'flex',
-        justifyContent: 'center',
         alignItems: 'center',
+        justifyContent: 'center',
       }}
     >
       <div
         style={{
-          background: 'rgba(0, 128, 0, 0.3)',
-          backdropFilter: 'blur(15px)',
-          padding: '40px',
-          borderRadius: '12px',
-          boxShadow: '0 8px 30px rgba(0,0,0,0.3)',
+          backdropFilter: 'blur(12px)',
+          background: 'rgba(255, 255, 255, 0.1)',
+          border: '1px solid rgba(255, 255, 255, 0.2)',
+          padding: '2rem',
+          borderRadius: '20px',
           width: '90%',
           maxWidth: '400px',
-          color: 'white',
-          textAlign: 'center',
+          color: '#fff',
+          boxShadow: '0 4px 30px rgba(0, 0, 0, 0.5)',
         }}
       >
-        <h1 style={{ marginBottom: '10px', fontSize: '28px', fontWeight: 'bold' }}>
+        <h2 style={{ fontSize: '1.8rem', marginBottom: '1rem', textAlign: 'center' }}>
           Welcome Back Yappers
-        </h1>
-        <p style={{ marginBottom: '20px', color: '#d1d5db' }}>
-          Enter your email to receive OTP
+        </h2>
+        <p style={{ textAlign: 'center', marginBottom: '1.5rem', fontSize: '0.9rem' }}>
+          Please enter your login details
         </p>
-        <form onSubmit={handleSubmit}>
+        <form>
           <input
             type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter your email"
-            required
-            style={{
-              width: '100%',
-              padding: '12px',
-              borderRadius: '8px',
-              border: 'none',
-              marginBottom: '20px',
-              fontSize: '16px',
-            }}
+            placeholder="Email"
+            style={inputStyle}
+          />
+          <input
+            type="text"
+            placeholder="Enter OTP"
+            style={{ ...inputStyle, marginTop: '1rem' }}
           />
           <button
             type="submit"
-            disabled={loading}
             style={{
-              backgroundColor: '#00FFAA',
+              marginTop: '1.5rem',
+              width: '100%',
+              padding: '0.75rem',
+              background: '#00FFAA',
+              border: 'none',
+              borderRadius: '10px',
               color: '#000',
               fontWeight: 'bold',
-              padding: '12px',
-              borderRadius: '8px',
-              border: 'none',
-              width: '100%',
+              fontSize: '1rem',
               cursor: 'pointer',
             }}
           >
-            {loading ? 'Sending...' : 'Send OTP'}
+            Login
           </button>
         </form>
-        <p style={{ marginTop: '15px', fontSize: '14px', color: '#ccc' }}>
-          Built with ❤️ by PulseAI
-        </p>
       </div>
     </div>
   )
+}
+
+const inputStyle = {
+  width: '100%',
+  padding: '0.75rem',
+  borderRadius: '8px',
+  border: '1px solid #ccc',
+  background: 'rgba(255,255,255,0.2)',
+  color: '#fff',
 }
