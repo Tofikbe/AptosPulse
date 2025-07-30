@@ -10,10 +10,11 @@ const handler = NextAuth({
     TwitterProvider({
       clientId: "31275186",
       clientSecret: "Mi2Sb8ChqYnC2TN7rQYhDcRYfVSF48Nc25V7bnNgkdtAs",
+      version: "2.0", // Important for OAuth 2.0 flow
     }),
     EmailProvider({
       sendVerificationRequest: async ({ identifier, url }) => {
-        const { data, error } = await resend.emails.send({
+        const { error } = await resend.emails.send({
           from: "PulseAI <otp@resend.dev>",
           to: [identifier],
           subject: "Your PulseAI Login Link",
@@ -28,9 +29,10 @@ const handler = NextAuth({
     }),
   ],
   pages: {
-    signIn: "/login", // Custom login page
+    signIn: "/login",
   },
-  secret: "some-random-secret", // You can use any long random string
+  secret: process.env.NEXTAUTH_SECRET || "some-random-secret", // replace if needed
 })
 
-export { handler as GET, handler as POST }
+export const GET = handler
+export const POST = handler
