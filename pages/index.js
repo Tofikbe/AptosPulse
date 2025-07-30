@@ -1,32 +1,46 @@
-import Image from "next/image"
-
 export default function Login() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-green-900 to-black relative overflow-hidden">
-      {/* Blur effect */}
-      <div className="absolute inset-0 backdrop-blur-md bg-black/40 z-0"></div>
+    <div style={{
+      height: '100vh',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      background: 'linear-gradient(135deg, #0f0c29, #302b63, #24243e)',
+      backgroundSize: '400% 400%',
+      animation: 'gradient 15s ease infinite',
+      color: '#fff',
+      fontFamily: 'sans-serif',
+      flexDirection: 'column'
+    }}>
+      <style jsx>{`
+        @keyframes gradient {
+          0% { background-position: 0% 50% }
+          50% { background-position: 100% 50% }
+          100% { background-position: 0% 50% }
+        }
+        input {
+          padding: 10px;
+          border: none;
+          border-radius: 5px;
+          margin: 5px 0;
+          width: 250px;
+        }
+        button {
+          padding: 10px 20px;
+          background-color: #00ff99;
+          border: none;
+          border-radius: 5px;
+          margin-top: 10px;
+          cursor: pointer;
+          font-weight: bold;
+        }
+      `}</style>
 
-      {/* Login Box */}
-      <div className="z-10 bg-white/10 backdrop-blur-lg p-6 rounded-2xl shadow-xl text-white w-80 flex flex-col items-center">
-        {/* Logo */}
-        <img
-          src="https://protoinfrastack.ivondy.com/media/4agqdaZyirwygydyqxZwYgAgfzK3pZrxWx3G"
-          alt="PulseAI Logo"
-          className="w-24 h-24 mb-4 rounded-full border border-white"
-        />
-
-        <h1 className="text-xl font-bold mb-4">Welcome to PulseAI</h1>
-
-        {/* Email Login */}
-        <button className="bg-green-600 hover:bg-green-700 w-full py-2 mb-3 rounded-md text-white font-medium">
-          Continue with Email
-        </button>
-
-        {/* Twitter Login */}
-        <button className="bg-black border border-white hover:bg-gray-900 w-full py-2 rounded-md text-white font-medium">
-          Continue with X (Twitter)
-        </button>
-      </div>
+      <h1>PulseAI Login</h1>
+      <form method="POST" action="/api/send-otp">
+        <input type="email" name="email" placeholder="Enter your email" required />
+        <button type="submit">Send OTP</button>
+      </form>
     </div>
   )
 }
